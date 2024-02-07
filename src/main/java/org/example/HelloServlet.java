@@ -18,12 +18,14 @@ public class HelloServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType(MediaType.TEXT_HTML);
-        String[] name = request.getParameterValues("name");
-        response.getWriter().println("hello ya <b>" + String.join(" ", name) + "</b>");
+        response.setStatus(201);
+        String name = request.getParameter("name");
+        if (name == null)
+            name = "guest";
+        response.getWriter().println("hello ya <b>" + name + "</b>");
         response.getWriter().println("<img src='book.jpg'/>");
         response.getWriter().println("<hr />");
         response.getWriter().println("copyright (c)");
-        response.setStatus(201);
         response.setHeader("my_test_hedears","test");
     }
 
